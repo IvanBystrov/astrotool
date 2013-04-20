@@ -19,3 +19,6 @@
 
 # Ignore database.yml as it's unique for each developer machine
 /config/database.yml
+
+/.idea
+
