@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html(lang="ru")
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -22,7 +22,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") Authproviders
+          %a.brand(href="#") Astrotool
           .container.nav-collapse
             %ul.nav
               - if user_signed_in?
@@ -41,10 +41,12 @@
               %ul.nav.nav-list
                 - if !user_signed_in?
                   / %li= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-                  / %li= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte)
+                  %li= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte)
 
       %footer
-        %p &copy; Company 2012
+        %p
+          &copy; AstroTool
+          = (Time.new).year.to_s
     /
       Javascripts
       \==================================================
