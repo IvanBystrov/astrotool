@@ -22,7 +22,10 @@ group :assets do
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'devise'
+gem 'twitter-bootstrap-rails'
 
+gem 'haml-rails'
 
 
   gem 'uglifier', '>= 1.0.3'
