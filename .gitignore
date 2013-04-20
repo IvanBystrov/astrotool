@@ -16,3 +16,6 @@
 
 #Ignoring other unnecessary files
 *.swp
+
+# Ignore database.yml as it's unique for each developer machine
+/config/database.yml
