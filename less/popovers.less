@@ -12,14 +12,16 @@
   width: 236px;
   padding: 1px;
   text-align: left; // Reset given new insertion method
-  background-color: @popoverBackground;
+  background-color: #f5f5f5;
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
           background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid rgba(0,0,0,.2);
-  .border-radius(6px);
+  .border-radius(5px);
   .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  
+  #gradient > .vertical(#d9dadc, #f5f5f5);
 
   // Overrides for proper insertion
   white-space: normal;
@@ -37,8 +39,8 @@
   font-size: 14px;
   font-weight: normal;
   line-height: 18px;
-  background-color: @popoverTitleBackground;
-  border-bottom: 1px solid darken(@popoverTitleBackground, 5%);
+  background-color: transparent;
+  border-bottom: 1px solid #bbbbbb;
   .border-radius(5px 5px 0 0);
 }
 
@@ -73,13 +75,13 @@
     margin-left: -@popoverArrowOuterWidth;
     border-bottom-width: 0;
     border-top-color: #999; // IE8 fallback
-    border-top-color: @popoverArrowOuterColor;
+    border-top-color: #d9dadc;
     bottom: -@popoverArrowOuterWidth;
     &:after {
       bottom: 1px;
       margin-left: -@popoverArrowWidth;
       border-bottom-width: 0;
-      border-top-color: @popoverArrowColor;
+      border-top-color: #d9dadc;
     }
   }
   &.right .arrow {
@@ -107,7 +109,7 @@
       top: 1px;
       margin-left: -@popoverArrowWidth;
       border-top-width: 0;
-      border-bottom-color: @popoverArrowColor;
+      border-bottom-color: #d9dadc;
     }
   }
 

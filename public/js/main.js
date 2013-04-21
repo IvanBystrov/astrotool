@@ -61,10 +61,10 @@ creditNode.index = 0;
 var coordinatesNode = document.createElement('div');
 coordinatesNode.id = 'coordinates-control';
 coordinatesNode.style.fontSize = '14px';
-coordinatesNode.style.color = '#176586';
+coordinatesNode.style.color = '#ffffff';
 coordinatesNode.style.textShadow = 'blue 1px 1px 1px';
 coordinatesNode.style.fontFamily = '"Helvetica Neue", Helvetica, Arial, sans-serif';
-coordinatesNode.style.margin = '24px 24px 24px 24px';
+coordinatesNode.style.margin = '5px 5px 5px 5px';
 coordinatesNode.style.whitespace = 'nowrap';
 creditNode.index = 0;
 
@@ -106,10 +106,20 @@ function initialize() {
 
   var mapOptions = {
     zoom: 3,
-    center: new google.maps.LatLng(0, 0),
+    center: new google.maps.LatLng(100, -20),
+    // disableDefaultUI: true,
     mapTypeControlOptions: {
       mapTypeIds: mapTypeIds,
       style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+    },
+    panControl: false,
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      overviewMapControl: false,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.SMALL
     }
   };
   map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -134,12 +144,39 @@ function initialize() {
       writeCenter(map);
   });
   
+  var dropDown;
+  var latestPoint;
+  
   google.maps.event.addListener(map, 'click', function(e) {
+      map.setCenter(e.latLng);
       
+      latestPoint = e.latLng;
       var ra = ra2lon(e.latLng.lng());
       var dec = e.latLng.lat();
       
+      if (dropDown) {
+          dropDown.setMap(null);
+          dropDown = null;
+      }
+      
       // show dropdown with loader
+      dropDown = new InfoBubble({
+        map: map,
+        content: '<div><h3>Загрузка</h3><p>Подождите&hellip;</p></div>',
+        position: latestPoint,
+        padding: 0,
+        backgroundColor: '#f5f5f5',
+        borderRadius: 5,
+        arrowSize: 10,
+        borderWidth: 0,
+        disableAutoPan: false,
+        hideCloseButton: true,
+        arrowPosition: 50,
+        backgroundClassName: 'map-tooltip',
+        arrowStyle: 2
+      });
+      
+      dropDown.open();
       
       // call server proxy script to load details from wikimapia
       $.ajax({
@@ -150,18 +187,53 @@ function initialize() {
           },
           dataType: 'json',
           success: function (response) {
-              console.log(response);
-              
               // put information into the dropdown
+              var title = '<h3>' + response.catalog_id;
+              if (response.human_names) {
+                  title += '<br />' + response.human_names;
+              }
               
+              title += '</h3>';
+              
+              var body = "<p>";
+              
+              if (response.constellation_name) {
+                  body += 'Созвездие: ' + response.constellation_name + '<br />';
+              }
+              
+              body += 'Прямое восхождение: ' + response.ra + '<br />';
+              body += 'Склонение: ' + response.de + '<br />';
+              body += 'Звездная величина: ' + response.mag;
+              
+              if (response.id) {
+                  body += '<a href="/skyobject/' + response.id + '">Обсуждения</a>';
+              }
+              
+              body += '</p>';
+              
+              dropDown.setMap(null);
+              
+              dropDown = new InfoBubble({
+                  map: map,
+                  content: title + body,
+                  position: latestPoint,
+                  padding: 0,
+                  backgroundColor: '#f5f5f5',
+                  borderRadius: 5,
+                  arrowSize: 10,
+                  borderWidth: 0,
+                  disableAutoPan: false,
+                  hideCloseButton: true,
+                  arrowPosition: 50,
+                  backgroundClassName: 'map-tooltip',
+                  arrowStyle: 2
+                });
+                
+              dropDown.open();
           },
           error: function () {
               // say that there are no any info for this object
-              
-          },
-          
-          complete: function () {
-              // hide loader
+              dropDown.setContent('<h3>В каталоге SDSS данного объекта не обнаружено</h3>');
           }
       });
       
@@ -177,3 +249,15 @@ if ($('#map_canvas').length) {
     initialize();
 }
 
+$('.header__user-menu a').popover({
+    placement: 'bottom',
+    trigger: 'click',
+    title: 'Войти с помощью:',
+    html: true,
+    content: '<p><a href="' + $('.header__user-menu a').attr('href') + '">Вконтакте</a></p>'
+});
+
+$('.header__user-menu a').click(function (e) {
+    e.preventDefault();
+    return false;
+});

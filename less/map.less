@@ -1,12 +1,37 @@
 #map_canvas {
-    width: 1000px;
-    height: 562px;
+    width: 100%;
+    height: 450px;
     background-color: #ccc
 }
 
-#credit-control {
-    font-size: @baseFontSize;
-    text-shadow: 45deg @white;
-    color: @linkColor;
-    margin-top: 36px;
+.top-sky-objects-container {
+    #gradient > .vertical(#dbe0ea, @white);
+    
+    height: 40px;
+    width: 100%;
+    
+    .border-top-left-radius(500px 20px);
+    .border-top-right-radius(500px 20px);
+    
+    position: relative;
+    top: -40px;
+    margin-bottom: -60px;
+    
+}
+
+.map-tooltip {
+    h3 {
+        margin-top: 0;
+        padding: 0 12px 0;
+        font-size: 18px;
+        font-weight: normal;
+        
+        margin-bottom: 12px;
+        
+        border-bottom: 1px solid #bbbbbb;
+    }
+    
+    p {
+        padding: 0 12px 12px;
+    }
 }
