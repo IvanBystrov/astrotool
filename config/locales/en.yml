@@ -13,4 +13,10 @@ en:
     developers_link: "Contribution"
     login_link: "Login"
     logout_link: "Logout"
-
+  footer:
+    donate: "Donate"
+    for_novices: "For novices"
+    source_code_link: "Source code"
+    popular_photos: "Popular photos"
+    show_all_photos: "Show all"
+    about: "About"

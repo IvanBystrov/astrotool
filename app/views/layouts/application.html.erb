@@ -75,23 +75,64 @@
         <div id="all-content-push"></div>
     </div>
     <!-- FOOTER START -->
-    <footer id="footer" class="container">
-        <div class="row">
-            <div class="span3">
-                <p class="footer__copyright">&copy;<%= link_to I18n::t("default.title"), root_path %> 2013</p>
+    <div id="footer__container">
+        <footer id="footer" class="container">
+            <div class="row">
+                <div class="span6">
+                    <p class="footer__copyright"><%= link_to I18n::t("default.title"), root_path %></p>
+                    
+                    <div class="row">
+                        <div class="span2">
+                            <nav>
+                                <ul>
+                                    <li><%= link_to I18n::t("header.login_link"), user_omniauth_authorize_path(:vkontakte) %></li>
+                                    <li><%= link_to I18n::t("footer.donate"), "/donate" %></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="span2">
+                            <nav>
+                                <ul>
+                                    <li><%= link_to I18n::t("footer.for_novices"), "/page/novices" %></li>
+                                    <li><a href="/posts"><%= I18n::t("header.posts_link") %></a></li>
+                                    <li><a href="/photos"><%= I18n::t("header.photos_link") %></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="span2">
+                            <nav>
+                                <ul>
+                                    <li><%= link_to I18n::t("footer.about"), "/page/about" %></li>
+                                    <li><a href="/page/developers"><%= I18n::t("header.developers_link") %></a></li>
+                                    <li><a href="https://github.com/IvanBystrov/astrotool"><%= I18n::t("footer.source_code_link") %></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <h3 class="popular-photos">
+                        <%= I18n::t("footer.popular_photos") %>
+                        <a href="/photos" class="footer__show-all-photos-link pull-right">
+                            <%= I18n::t("footer.show_all_photos") %>
+                        </a>
+                    </h3>
+                    <div class="clear"></div>
+                    
+                    <div class="footer__popular-photos-container">
+                        <% for i in 1..16 do %>
+                        <a href="/photo/<%= i %>">
+                            <span style="display: block; background-color: black; width: 60px; height: 60px;">
+                        </a>
+                        <% end %>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    
+                </div>
             </div>
-            <div class="span3 offset2">
-                <nav>
-                    <ul>
-                        
-                    </ul>
-                </nav>
-            </div>
-            <div class="span3 offset1">
-                
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     <!-- FOOTER END -->
     <script type="text/javascript" charset="utf-8" src="/js/main.js"></script>
     <script>

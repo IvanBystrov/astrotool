@@ -3602,3 +3602,68 @@ h1 .big-header-with-icon-container {
 .text-align-center-container {
   text-align: center;
 }
+#footer__container {
+  border-top: 4px solid #dedede;
+  background-color: #e6e8eb;
+  background-image: -moz-linear-gradient(top, #eeeeee, #dadee6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dadee6));
+  background-image: -webkit-linear-gradient(top, #eeeeee, #dadee6);
+  background-image: -o-linear-gradient(top, #eeeeee, #dadee6);
+  background-image: linear-gradient(to bottom, #eeeeee, #dadee6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdadee6', GradientType=0);
+}
+.footer__copyright {
+  margin: 36px 0 36px;
+  padding: 0;
+  text-transform: uppercase;
+}
+.footer__copyright a {
+  font-size: 24px;
+  color: #000000;
+}
+.footer__copyright a:hover {
+  color: lighter(#000000, 15%);
+}
+#footer nav + nav {
+  border-right: 1px solid #bbbbbb;
+}
+#footer nav ul {
+  list-style-type: none;
+  margin: 0;
+}
+#footer nav ul li {
+  margin-top: 12px;
+}
+#footer nav ul li a {
+  text-decoration: underline;
+  color: #000000;
+}
+#footer nav ul li a:hover {
+  text-decoration: none;
+  color: lighter(#000000, 15%);
+}
+h3.popular-photos {
+  margin: 36px 0 36px;
+  font-size: 24px;
+  font-weight: normal;
+  padding: 0;
+}
+h3.popular-photos .footer__show-all-photos-link {
+  font-size: 14px;
+  text-decoration: underline;
+  color: #000000;
+}
+h3.popular-photos .footer__show-all-photos-link:hover {
+  text-decoration: none;
+  color: lighter(#000000, 15%);
+}
+.footer__popular-photos-container {
+  margin-left: -2px;
+}
+.footer__popular-photos-container a {
+  float: left;
+  margin: 0 1px 1px 0;
+  width: 60px;
+  height: 60px;
+}

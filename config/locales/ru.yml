@@ -10,4 +10,10 @@ ru:
     developers_link: "Разработчикам"
     login_link: "Вход"
     logout_link: "Выход"
-  
+  footer:
+    donate: "Поддержи проект"
+    for_novices: "Новичкам"
+    source_code_link: "Исходный код"
+    popular_photos: "Популярные фотографии"
+    show_all_photos: "Показать все"
+    about: "О проекте"
