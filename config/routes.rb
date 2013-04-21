@@ -2,6 +2,9 @@ Astrotool::Application.routes.draw do
 
   devise_for :users #, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users, :only => [:index, :destroy]
+  
+  get 'sky_objects/search'
+  
   root :to => 'site#index'
 
   # The priority is based upon order of creation:

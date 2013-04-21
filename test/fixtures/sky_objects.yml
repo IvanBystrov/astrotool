@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  ra: MyString
+  de: MyString
+  mag: MyString
+  constellation_name: MyString
+  catalog_id: MyString
+  human_names: MyString
+
+two:
+  name: MyString
+  ra: MyString
+  de: MyString
+  mag: MyString
+  constellation_name: MyString
+  catalog_id: MyString
+  human_names: MyString

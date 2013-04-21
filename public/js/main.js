@@ -1,4 +1,8 @@
 var mapTypes = {};
+
+function getCurrentLocale() {
+    return $('html').attr('lang') || 'en';
+}
  
 // set up the map types
 mapTypes['sky'] = {
@@ -41,35 +45,6 @@ function getHorizontallyRepeatingTileUrl(coord, zoom, urlfunc) {
   return urlfunc({x:x,y:y}, zoom)
 }
 
-function getMarsTileUrl(baseUrl, coord, zoom) {
-  var bound = Math.pow(2, zoom);
-  var x = coord.x;
-  var y = coord.y;
-  var quads = ['t'];
-
-  for (var z = 0; z < zoom; z++) {
-    bound = bound / 2;
-    if (y < bound) {
-      if (x < bound) {
-        quads.push('q');
-      } else {
-        quads.push('r');
-        x -= bound;
-      }
-    } else {
-      if (x < bound) {
-        quads.push('t');
-        y -= bound;
-      } else {
-        quads.push('s');
-        x -= bound;
-        y -= bound;
-      }
-    }
-  }
-
-  return baseUrl + quads.join('') + ".jpg";
-}
 
 var map;
 var mapTypeIds = [];
@@ -83,8 +58,43 @@ creditNode.style.margin = '0 2px 2px 0';
 creditNode.style.whitespace = 'nowrap';
 creditNode.index = 0;
 
+var coordinatesNode = document.createElement('div');
+coordinatesNode.id = 'coordinates-control';
+coordinatesNode.style.fontSize = '14px';
+coordinatesNode.style.color = '#176586';
+coordinatesNode.style.textShadow = 'blue 1px 1px 1px';
+coordinatesNode.style.fontFamily = '"Helvetica Neue", Helvetica, Arial, sans-serif';
+coordinatesNode.style.margin = '24px 24px 24px 24px';
+coordinatesNode.style.whitespace = 'nowrap';
+creditNode.index = 0;
+
+
 function setCredit(credit) {
   creditNode.innerHTML = credit + ' -';
+}
+
+function ra2lon(ra){
+  var lon = 180 - ra;
+  return lon;
+}
+
+function ra2lonHumanReadable(ra) {
+    return leftThreeSignsAfterComma(ra2lon(ra));
+}
+
+function leftThreeSignsAfterComma(num) {
+    return Math.round(num * 1000) / 1000;
+}
+
+
+
+function lon2ra(lon){
+  var ra = 180 - lon;
+  return ra;
+}
+
+function writeCenter(map){
+  coordinatesNode.innerHTML = "RA: " + ra2lonHumanReadable(map.getCenter().lng()) + " DEC: " + leftThreeSignsAfterComma(map.getCenter().lat());
 }
 
 function initialize() {
@@ -106,6 +116,9 @@ function initialize() {
 
   // push the credit/copyright custom control
   map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(creditNode);
+  
+  // push coordinates line custom control
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(coordinatesNode);
 
   // add the new map types to map.mapTypes
   for (key in mapTypes) {
@@ -116,11 +129,51 @@ function initialize() {
   google.maps.event.addListener(map, 'maptypeid_changed', function() {
     setCredit(mapTypes[map.getMapTypeId()].credit);
   });
+  
+  google.maps.event.addListener(map, 'center_changed', function () {
+      writeCenter(map);
+  });
+  
+  google.maps.event.addListener(map, 'click', function(e) {
+      
+      var ra = ra2lon(e.latLng.lng());
+      var dec = e.latLng.lat();
+      
+      // show dropdown with loader
+      
+      // call server proxy script to load details from wikimapia
+      $.ajax({
+          url: '/sky_objects/search',
+          data: {
+              'ra': ra,
+              'de': dec
+          },
+          dataType: 'json',
+          success: function (response) {
+              console.log(response);
+              
+              // put information into the dropdown
+              
+          },
+          error: function () {
+              // say that there are no any info for this object
+              
+          },
+          
+          complete: function () {
+              // hide loader
+          }
+      });
+      
+      
+  });
 
   // start with the moon map type
   map.setMapTypeId('sky');
+  writeCenter(map);
 }
 
 if ($('#map_canvas').length) {
     initialize();
 }
+

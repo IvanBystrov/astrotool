@@ -74,6 +74,7 @@ GEM
     multi_json (1.7.2)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
+    nokogiri (1.5.9)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -154,6 +155,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   mysql2
+  nokogiri
   omniauth
   omniauth-facebook
   omniauth-vkontakte

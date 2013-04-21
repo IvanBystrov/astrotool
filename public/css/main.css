@@ -3503,6 +3503,12 @@ body {
   height: 562px;
   background-color: #cccccc;
 }
+#credit-control {
+  font-size: 14px;
+  text-shadow: 45deg #ffffff;
+  color: #176586;
+  margin-top: 36px;
+}
 h1 {
   color: #000;
   text-align: center;

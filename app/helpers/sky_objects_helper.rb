@@ -1,0 +1,2 @@
+module SkyObjectsHelper
+end

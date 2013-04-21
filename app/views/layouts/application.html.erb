@@ -93,7 +93,15 @@
                         <div class="span2">
                             <nav>
                                 <ul>
-                                    <li><%= link_to I18n::t("footer.for_novices"), "/page/novices" %></li>
+                                    <li>
+                                        <% if I18n.locale == :ru %>
+                                        <%= link_to I18n::t("footer.for_novices"), "http://ru.wikipedia.org/wiki/%D0%90%D1%81%D1%82%D1%80%D0%BE%D0%BD%D0%BE%D0%BC%D0%B8%D1%8F" %>
+                                        <% else %>
+                                        <%= link_to I18n::t("footer.for_novices"), "http://en.wikipedia.org/wiki/Astronomy" %>
+                                        <% end %>
+                                            
+                                        
+                                    </li>
                                     <li><a href="/posts"><%= I18n::t("header.posts_link") %></a></li>
                                     <li><a href="/photos"><%= I18n::t("header.photos_link") %></a></li>
                                 </ul>
