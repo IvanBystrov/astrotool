@@ -1,4 +1,6 @@
 var mapTypes = {};
+var dropDown;
+var latestPoint;
 
 function getCurrentLocale() {
     return $('html').attr('lang') || 'en';
@@ -144,8 +146,7 @@ function initialize() {
       writeCenter(map);
   });
   
-  var dropDown;
-  var latestPoint;
+  
   
   google.maps.event.addListener(map, 'click', function(e) {
       map.setCenter(e.latLng);
@@ -261,3 +262,68 @@ $('.header__user-menu a').click(function (e) {
     e.preventDefault();
     return false;
 });
+
+$('#search-form').submit(function (e) {
+    $.ajax({
+        dataType: 'json',
+        url: '/sky_objects/search',
+        data: {
+            q: $.trim($('#search-input').val())
+        },
+        success: function (response) {
+            var title = '<h3>' + response.catalog_id;
+              if (response.human_names) {
+                  title += '<br />' + response.human_names;
+              }
+              
+              title += '</h3>';
+              
+              var body = "<p>";
+              
+              if (response.constellation_name) {
+                  body += 'Созвездие: ' + response.constellation_name + '<br />';
+              }
+              
+              body += 'Прямое восхождение: ' + response.ra + '<br />';
+              body += 'Склонение: ' + response.de + '<br />';
+              body += 'Звездная величина: ' + response.mag;
+              
+              if (response.id) {
+                  body += '<a href="/skyobject/' + response.id + '">Обсуждения</a>';
+              }
+              
+              body += '</p>';
+              
+              if (dropDown) {
+                  dropDown.setMap(null);
+              }
+              
+              latestPoint = new google.maps.LatLng(ra2lon(response.ra), response.de);
+              
+              dropDown = new InfoBubble({
+                  map: map,
+                  content: title + body,
+                  position: latestPoint,
+                  padding: 0,
+                  backgroundColor: '#f5f5f5',
+                  borderRadius: 5,
+                  arrowSize: 10,
+                  borderWidth: 0,
+                  disableAutoPan: false,
+                  hideCloseButton: true,
+                  arrowPosition: 50,
+                  backgroundClassName: 'map-tooltip',
+                  arrowStyle: 2
+                });
+                
+              dropDown.open();
+              
+              map.setCenter(latestPoint);
+        }
+    });
+    
+    
+    e.preventDefault();
+    return false;
+});
+
