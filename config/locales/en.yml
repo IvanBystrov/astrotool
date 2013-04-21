@@ -5,6 +5,8 @@ en:
   default:
     title: "AstroTool"
     search_placeholder: "Search..."
+    recent_discussions: "Recent Discussions"
+    show_more_discussions: "Show more"
   header:
     posts_link: "Discussions"  
     photos_link: "Photos"

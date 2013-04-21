@@ -1,0 +1,121 @@
+h1 {
+    color: #000;
+    text-align: center;
+    margin: 36px 0 24px;
+    font-weight: normal;
+    font-size: 24px;
+    position: relative;
+    
+    hr {
+        background-color: #c9c9c9;
+        height: 1px;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        margin: 0;
+        z-index: 1;
+    }
+    
+    .big-header-with-icon-container {
+        display: inline-block;
+        z-index: 3;
+        background-color: @white;
+        position: relative;
+        padding: 0 12px;
+    }
+}
+
+@post-announce-border-radius: 10px;
+
+.post-announce {
+    position: relative;
+    
+    border-radius: @post-announce-border-radius;
+    
+    #gradient > .vertical(#b7c2d5, #f5f5f5);
+    
+    text-align: center;
+    
+    padding: 24px 24px 0;
+    
+    .post-announce__image-container {
+        a {
+            background-color: @white;
+            border-radius: 6px;
+            padding: 6px;
+            display: inline-block;
+        }
+    }
+    
+    h2 {
+        color: @black;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 20px;
+        margin: 12px 0 12px;
+        
+        
+        a {
+            color: @black;
+            &:hover {
+                color: lighter(@black, 15%);
+            }
+        }
+    }
+    
+    .post-announce__controls {
+        background-color: @black;
+        color: @white;
+        
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 24px;
+        text-align: justify;
+        
+        border-bottom-left-radius: @post-announce-border-radius;
+        border-bottom-right-radius: @post-announce-border-radius;
+        
+        a {
+            color: @white;
+            
+            &:hover {
+                color: @white;
+            }
+        }
+    }
+    
+    .post-announce__user-link {
+        display: inline-block;
+        margin-bottom: 24px + 24px * 2 + @baseLineHeight;
+        
+        color: @lighterTextColor;
+        
+        &:hover {
+            color: darker(@lighterTextColor, 15%);
+        }
+    }
+}
+
+.show-more-discussions-link {
+    border-bottom: 1px dotted @black;
+    
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    color: @black;
+    
+    margin: 24px 0 36px;
+    
+    &:hover {
+        color: lighter(@black, 15%);
+        text-decoration: none;
+        
+        border-bottom: none;
+    }
+}
+
+.text-align-center-container {
+    text-align: center;
+}

@@ -2,6 +2,8 @@ ru:
   default:
     title: "AstroTool"
     search_placeholder: "Искать..."
+    recent_discussions: "Сейчас обсуждают"
+    show_more_discussions: "Показать больше"
   header:
     posts_link: "Обсуждения"  
     photos_link: "Фото"
