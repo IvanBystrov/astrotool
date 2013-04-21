@@ -2,4 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  default:
+    title: "AstroTool"
+    search_placeholder: "Search..."
+  header:
+    posts_link: "Discussions"  
+    photos_link: "Photos"
+    developers_link: "Contribution"
+    login_link: "Login"
+    logout_link: "Logout"
+

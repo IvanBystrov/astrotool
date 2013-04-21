@@ -1,0 +1,11 @@
+ru:
+  default:
+    title: "AstroTool"
+    search_placeholder: "Искать..."
+  header:
+    posts_link: "Обсуждения"  
+    photos_link: "Фото"
+    developers_link: "Разработчикам"
+    login_link: "Вход"
+    logout_link: "Выход"
+  

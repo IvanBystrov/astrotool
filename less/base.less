@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+
+@footerHeight: 308px;
+
+#all-content-wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -@footerHeight;
+}
+#footer, #all-content-push {
+  height: @footerHeight;
+}
